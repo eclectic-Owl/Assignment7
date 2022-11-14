@@ -139,6 +139,39 @@ app.post('/findCourse', async (req, res) => {
     }
 });
 
+app.post('/editStudentById', async (req,res) =>{
+try{
+    coin = await Student.updateOne({_StudentID: req.body.studentID}
+        ,{
+            fname: req.body.fname
+        },{upsert: true});
+        if(Student)
+        {
+            res.status(200).json("(Student edited)");
+        }else{
+            res.status(200).json("(No changes made)");
+        }
+}
+catch{
+    return res.status(500).json("(Failed to edit a student)");
+}
+});
+
+//app.post('/editStudentByFname', async (req,res) =>{
+    
+//})
+
+//app.post('/editCourseByCourseName', async (req,res) =>{
+    
+//})
+
+//app.post('/deleteCourseById', async (req,res) =>{
+    
+//})
+
+//app.post('/removeStudentFromClasses', async (req,res) =>{
+    
+//})
 // listening in on port 1200 for any activity -- SSSSHHHHHHH!!!!
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
